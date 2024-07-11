@@ -23,5 +23,15 @@ class PostController {
         return $this->post->read();
     }
 
-    // Add update and delete methods similarly
+    public function getPostById($id) {
+        return $this->post->getPostById($id);
+    }
+
+    public function update($id, $user_id, $title, $content) {
+        $this->post->id = $id;
+        $this->post->user_id = $user_id;
+        $this->post->title = $title;
+        $this->post->content = $content;
+        return $this->post->update();
+    }
 }

@@ -37,5 +37,30 @@ class Post {
         return $stmt;
     }
 
-    // Add update and delete methods similarly
+    public function getPostById($id) {
+        $query = "SELECT * FROM " . $this->table . " WHERE id = :id LIMIT 0,1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function update() {
+        $query = "UPDATE " . $this->table . " SET title = :title, content = :content WHERE id = :id";
+        $stmt = $this->conn->prepare($query);
+
+        $this->title = htmlspecialchars(strip_tags($this->title));
+        $this->content = htmlspecialchars(strip_tags($this->content));
+
+        $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':content', $this->content);
+        $stmt->bindParam(':id', $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    // Add delete method if necessary
 }
