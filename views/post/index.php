@@ -10,4 +10,4 @@ while ($row = $posts->fetch(PDO::FETCH_ASSOC)) {
     echo "<a href='post/show.php?id={$id}'>Read more</a>";
     echo "<hr>";
 }
-?>
+
